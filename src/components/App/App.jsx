@@ -1,15 +1,22 @@
 import { Editor } from '@tinymce/tinymce-react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
+  const [initialValue, setInitialValue] = useState('')
+
+  useEffect(() => {
+    setInitialValue(localStorage.getItem('_htmleditor_'))
+  }, [])
+
   const handleEditorChange = (content, editor) => {
-    console.log('Content was updated:', content)
+    localStorage.setItem('_htmleditor_', content)
   }
 
   return (
     <Editor
       apiKey="hh5kg0elochz6bff3y37wn287nnbefh3g07o68m5fl6igvay"
-      initialValue="<p>This is the initial content of the editor</p>"
+      initialValue={initialValue}
       init={{
         height: 500,
         menubar: true,
