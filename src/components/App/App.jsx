@@ -1,5 +1,5 @@
 import { Editor } from '@tinymce/tinymce-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 // Optimization
@@ -8,23 +8,25 @@ import './App.css'
 // Answer   :   Every editor change fires 'handleEditorChange' that
 //              triggers 'localStorage' update.
 // Solution :   On leaving page show alert with prompt to save file in 'localStorage'.
+// New Idea :   Get rid of 'useState hook' and use just 'useRef' instead.
 // ------------
 function App() {
   const [initialValue, setInitialValue] = useState('')
+  const refStateToSave = useRef('')
 
   const handleEditorChange = (content, editor) => {
-    localStorage.setItem('_htmleditor_', content)
+    refStateToSave.current = content
   }
 
-  const onUnload = e => {
-    e.preventDefault()
-    e.returnValue = true
+  const onUnload = () => {
+    localStorage.setItem('_htmleditor_', refStateToSave.current)
   }
 
   useEffect(() => {
     window.addEventListener('beforeunload', onUnload)
     setInitialValue(localStorage.getItem('_htmleditor_'))
-    return window.removeEventListener('beforeunload', onUnload)
+    refStateToSave.current = localStorage.getItem('_htmleditor_')
+    return () => window.removeEventListener('beforeunload', onUnload)
   }, [])
 
   return (
@@ -41,8 +43,8 @@ function App() {
         ],
         toolbar:
           'undo redo | formatselect | bold italic backcolor | \
-        alignleft aligncenter alignright alignjustify | \
-        bullist numlist outdent indent | removeformat | help',
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help',
       }}
       onEditorChange={handleEditorChange}
     />
