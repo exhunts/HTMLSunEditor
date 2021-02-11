@@ -2,16 +2,30 @@ import { Editor } from '@tinymce/tinymce-react'
 import { useEffect, useState } from 'react'
 import './App.css'
 
+// Optimization
+// ------------
+// Question :   What is to optimize?
+// Answer   :   Every editor change fires 'handleEditorChange' that
+//              triggers 'localStorage' update.
+// Solution :   On leaving page show alert with prompt to save file in 'localStorage'.
+// ------------
 function App() {
   const [initialValue, setInitialValue] = useState('')
-
-  useEffect(() => {
-    setInitialValue(localStorage.getItem('_htmleditor_'))
-  }, [])
 
   const handleEditorChange = (content, editor) => {
     localStorage.setItem('_htmleditor_', content)
   }
+
+  const onUnload = e => {
+    e.preventDefault()
+    e.returnValue = true
+  }
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', onUnload)
+    setInitialValue(localStorage.getItem('_htmleditor_'))
+    return window.removeEventListener('beforeunload', onUnload)
+  }, [])
 
   return (
     <Editor
