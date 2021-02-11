@@ -5,7 +5,7 @@ export default function HTMLEditor() {
   const [initialValue, setInitialValue] = useState('')
   const refStateToSave = useRef('')
 
-  const handleEditorChange = (content, editor) => {
+  const handleEditorChange = content => {
     refStateToSave.current = content
   }
 
