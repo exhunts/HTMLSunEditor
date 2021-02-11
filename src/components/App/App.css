@@ -1,0 +1,40 @@
+.container {
+  max-width: 1280px;
+  margin: 0px auto;
+}
+
+.jumbotrone {
+  margin-bottom: 30px;
+  color: #fff;
+  background-color: rgb(104, 104, 255);
+  font-family: sans-serif;
+}
+
+.jumbotrone__inner {
+  padding: 40px 0;
+}
+
+.jumbotrone__title {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  width: 100%;
+  height: 70px;
+  color: #fff;
+  background-color: rgb(92, 92, 92);
+  font-family: sans-serif;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+}
+
+.footer__content {
+}
