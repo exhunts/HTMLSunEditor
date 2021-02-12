@@ -10,8 +10,8 @@ import './index.css'
 
 Sentry.init({
   dsn:
-    'https://289462ed2c5046c6af7af041ce14d5c7@o522742.ingest.sentry.io/5634831',
-  release: 'my-project-name@' + process.env.npm_package_version,
+    'https://931f2628294b46d8b3b583071da6da67@o522742.ingest.sentry.io/5634980',
+  release: 'html-suneditor@' + process.env.npm_package_version,
   integrations: [new Integrations.BrowserTracing()],
 
   // We recommend adjusting this value in production, or using tracesSampler
