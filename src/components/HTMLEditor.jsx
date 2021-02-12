@@ -30,7 +30,7 @@ export default function HTMLEditor() {
         enableToolbar={true}
         showToolbar={true}
         setOptions={{
-          height: 500,
+          height: 300,
           buttonList: buttonList.complex,
         }}
       />
