@@ -5,11 +5,11 @@ import * as Sentry from '@sentry/react'
 
 function App() {
   return (
-    <>
+    <div>
       <Jumbotrone />
       <HTMLEditor />
       <Footer />
-    </>
+    </div>
   )
 }
 

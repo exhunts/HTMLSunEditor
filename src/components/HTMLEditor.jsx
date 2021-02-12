@@ -24,16 +24,18 @@ export default function HTMLEditor() {
 
   return (
     <div className="container">
-      <SunEditor
-        setContents={content}
-        ref={editorRef}
-        enableToolbar={true}
-        showToolbar={true}
-        setOptions={{
-          height: 300,
-          buttonList: buttonList.complex,
-        }}
-      />
+      <div className="editor">
+        <SunEditor
+          setContents={content}
+          ref={editorRef}
+          enableToolbar={true}
+          showToolbar={true}
+          setOptions={{
+            height: 400,
+            buttonList: buttonList.complex,
+          }}
+        />
+      </div>
     </div>
   )
 }
