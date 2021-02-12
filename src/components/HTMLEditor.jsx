@@ -1,45 +1,38 @@
 import { Editor } from '@tinymce/tinymce-react'
 import { useEffect, useRef, useState } from 'react'
+import SunEditor, { buttonList } from 'suneditor-react'
 
 export default function HTMLEditor() {
-  const [initialValue, setInitialValue] = useState('')
+  const [content, setContent] = useState('')
   const refStateToSave = useRef('')
-
-  const handleEditorChange = content => {
-    refStateToSave.current = content
-  }
+  const editorRef = useRef()
 
   const onUnload = () => {
-    localStorage.setItem('_htmleditor_', refStateToSave.current)
+    localStorage.setItem(
+      '_htmleditor_',
+      editorRef.current.editor.core.getContents()
+    )
   }
 
   useEffect(() => {
     window.addEventListener('beforeunload', onUnload)
     const localStorageState = localStorage.getItem('_htmleditor_')
-    setInitialValue(localStorageState)
+    setContent(localStorageState)
     refStateToSave.current = localStorageState
     return () => window.removeEventListener('beforeunload', onUnload)
   }, [])
 
   return (
     <div className="container">
-      <Editor
-        apiKey="hh5kg0elochz6bff3y37wn287nnbefh3g07o68m5fl6igvay"
-        initialValue={initialValue}
-        init={{
+      <SunEditor
+        setContents={content}
+        ref={editorRef}
+        enableToolbar={true}
+        showToolbar={true}
+        setOptions={{
           height: 500,
-          menubar: true,
-          plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount',
-          ],
-          toolbar:
-            'undo redo | formatselect | bold italic backcolor | \
-            alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | removeformat | help',
+          buttonList: buttonList.complex,
         }}
-        onEditorChange={handleEditorChange}
       />
     </div>
   )

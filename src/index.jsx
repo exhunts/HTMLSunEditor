@@ -5,6 +5,7 @@ import App from './components/App'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
+import 'suneditor/dist/css/suneditor.min.css'
 import './index.css'
 
 Sentry.init({
