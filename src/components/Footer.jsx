@@ -5,7 +5,7 @@ export default function Footer() {
     <div className="footer">
       <div className="container">
         <div className="footer__inner">
-          <div className="footer__content">©2021 New Company</div>
+          <div className="footer__content">Gregory Kafanov 2021</div>
         </div>
       </div>
     </div>
